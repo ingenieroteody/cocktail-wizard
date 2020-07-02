@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block header %}
+    My Account
+{% endblock %}
+
+{% block main %}
+    <br>
+    <table>
+        <tbody>
+        <tr>
+            <td>Username</td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td>Date Joined</td>
+            <td>{{ user.date_joined }}</td>
+        </tr>
+        <tr>
+            <td>Last Login</td>
+            <td>{{ user.last_login }}</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+{% endblock %}

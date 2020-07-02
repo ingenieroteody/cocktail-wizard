@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block header %}
+    Sign Up
+{% endblock %}
+
+{% block main %}
+    <br>
+    <form action="/signup/" method="post">
+        {% csrf_token %}
+        <p>
+            <label>Username</label><br>
+            <input id="username" type="text" name="username">
+        </p>
+        <p>
+            <label>Password</label><br>
+            <input id="your_name" type="password" name="password">
+        </p>
+        <input type="submit" value="Sign Up">
+    </form>
+{% endblock %}
+
+{% block footer %}
+    Need an account? <a href="/login"><br>Click here to log in</a>
+{% endblock %}

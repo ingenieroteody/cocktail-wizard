@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block header %}
+    {{ request.user|capfirst }}'s Cocktails
+{% endblock %}
+
+{% block main %}
+
+    <style>
+        .div-cocktail {
+            max-width: 100px;
+            margin: 30px 10px 5px 10px;
+        }
+        div.inline {
+            float: left;
+        }
+        .clearBoth {
+            clear: both;
+        }
+        .centered {
+            text-align: center;
+        }
+    </style>
+
+    {% for cocktail in cocktails %}
+
+        <div class="inline div-cocktail">
+            <a href="/cocktail/{{ cocktail.id }}/">
+                <img src="{{ cocktail.image.url }}" class="img-cocktail"><br>
+                <div class="centered">{{ cocktail.name }}</div>
+            </a>
+        </div>
+    {% endfor %}
+    <div class="clearBoth"></div>
+
+{% endblock %}

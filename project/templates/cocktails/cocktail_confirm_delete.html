@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block header %}
+    Confirm Delete: {{ cocktail.name }}
+{% endblock %}
+
+{% block main %}
+
+    <style>
+        .img-warning {
+            max-width: 50px;
+        }
+    </style>
+
+    <p>
+        <img src="/static/warning.png" class="img-warning">
+        Are you <em>sure</em> you want to delete <strong>{{ cocktail.name }}</strong>?
+    </p>
+
+    <p>
+        <button onclick="window.location.href = '/cocktail/{{ cocktail.id }}/delete/';">Confirm Delete</button>
+    </p>
+
+{% endblock %}
