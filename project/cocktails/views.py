@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from cocktails.models import Cocktail
 from cocktails.models import Measure
@@ -60,6 +61,15 @@ def my_account(request, id):
 
 
 def list_cocktails(request):
+    cocktails_list = Cocktail.objects.only('image','id','name')
+    paginator = Paginator(cocktails_list,12)
+    page = request.GET.get('page', 1)
+    try:
+        cocktails = paginator.page(page)
+    except PageNotAnInteger:
+        cocktails = paginator.page(1)
+    except EmptyPage:
+        cocktails = paginator.page(paginator.num_pages)
     return render(request, 'cocktail_list.html', {'cocktails': cocktails})
 
 
