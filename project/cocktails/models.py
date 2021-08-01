@@ -5,36 +5,37 @@ from django.contrib.auth.models import User
 from django.core.files import File
 from django.db import models
 
+from .base_model import BaseModel
 
-class Glass(models.Model):
+class Glass(BaseModel):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return f"{self.id} - {self.name}"
 
 
-class Category(models.Model):
+class Category(BaseModel):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return f"{self.id} - {self.name}"
 
 
-class Ingredient(models.Model):
+class Ingredient(BaseModel):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return f"{self.id} - {self.name}"
 
 
-class Measure(models.Model):
+class Measure(BaseModel):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return f"{self.id} - {self.name}"
 
 
-class Cocktail(models.Model):
+class Cocktail(BaseModel):
     name = models.CharField(max_length=50)
     alcoholic = models.BooleanField()
     instructions = models.TextField()
@@ -82,3 +83,9 @@ class Cocktail(models.Model):
             name=os.path.basename(url),
             content=File(open(result[0], 'rb')),
         )
+
+class Ingredients(BaseModel):
+    cocktail = models.ForeignKey(Cocktail,on_delete=models.CASCADE,blank=False,null=False)
+    ingredient = models.ForeignKey(Ingredient,on_delete=models.CASCADE,blank=True,null=True)
+    measure = models.ForeignKey(Measure, on_delete=models.CASCADE, blank=True, null=True)
+

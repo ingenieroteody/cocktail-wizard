@@ -40,23 +40,11 @@
 
             <td>Ingredients</td>
             <td>
-                <ul>
-                {% if cocktail.measure1 %}<li>{{ cocktail.measure1.name }} {{ cocktail.ingredient1.name }}</li>{% endif %}
-                {% if cocktail.measure2 %}<li>{{ cocktail.measure2.name }} {{ cocktail.ingredient2.name }}</li>{% endif %}
-                {% if cocktail.measure3 %}<li>{{ cocktail.measure3.name }} {{ cocktail.ingredient3.name }}</li>{% endif %}
-                {% if cocktail.measure4 %}<li>{{ cocktail.measure4.name }} {{ cocktail.ingredient4.name }}</li>{% endif %}
-                {% if cocktail.measure5 %}<li>{{ cocktail.measure5.name }} {{ cocktail.ingredient5.name }}</li>{% endif %}
-                {% if cocktail.measure6 %}<li>{{ cocktail.measure6.name }} {{ cocktail.ingredient6.name }}</li>{% endif %}
-                {% if cocktail.measure7 %}<li>{{ cocktail.measure7.name }} {{ cocktail.ingredient7.name }}</li>{% endif %}
-                {% if cocktail.measure8 %}<li>{{ cocktail.measure8.name }} {{ cocktail.ingredient8.name }}</li>{% endif %}
-                {% if cocktail.measure9 %}<li>{{ cocktail.measure9.name }} {{ cocktail.ingredient9.name }}</li>{% endif %}
-                {% if cocktail.measure10 %}<li>{{ cocktail.measure10.name }} {{ cocktail.ingredient10.name }}</li>{% endif %}
-                {% if cocktail.measure11 %}<li>{{ cocktail.measure11.name }} {{ cocktail.ingredient11.name }}</li>{% endif %}
-                {% if cocktail.measure12 %}<li>{{ cocktail.measure12.name }} {{ cocktail.ingredient12.name }}</li>{% endif %}
-                {% if cocktail.measure13 %}<li>{{ cocktail.measure13.name }} {{ cocktail.ingredient13.name }}</li>{% endif %}
-                {% if cocktail.measure14 %}<li>{{ cocktail.measure14.name }} {{ cocktail.ingredient14.name }}</li>{% endif %}
-                {% if cocktail.measure15 %}<li>{{ cocktail.measure15.name }} {{ cocktail.ingredient15.name }}</li>{% endif %}
-                </ul>
+                {% for i in ingredients %}
+                    <ul>
+                        <li>{{ i.measure.name }} {{ i.ingredient.name }}</li>
+                    </ul>
+                {% endfor %}
             </td>
 
             <tr>

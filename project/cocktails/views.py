@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from cocktails.models import Cocktail
+from cocktails.models import Measure
+from cocktails.models import Ingredient
+from cocktails.models import Ingredients
 
 
 def user_login(request):
@@ -57,13 +60,13 @@ def my_account(request, id):
 
 
 def list_cocktails(request):
-    cocktails = Cocktail.objects.all()
     return render(request, 'cocktail_list.html', {'cocktails': cocktails})
 
 
 def view_cocktail(request, id):
     cocktail = Cocktail.objects.get(id=id)
-    return render(request, 'cocktail_view.html', {'cocktail': cocktail})
+    ingredients = Ingredients.objects.filter(cocktail=id)
+    return render(request, 'cocktail_view.html', {'cocktail': cocktail,'ingredients':ingredients})
 
 
 def confirm_delete_cocktail(request, id):
