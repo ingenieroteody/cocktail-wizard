@@ -10,6 +10,8 @@ from cocktails.models import Measure
 from cocktails.models import Ingredient
 from cocktails.models import Ingredients
 
+import itertools
+import random
 
 def user_login(request):
 
@@ -76,7 +78,10 @@ def list_cocktails(request):
 def view_cocktail(request, id):
     cocktail = Cocktail.objects.get(id=id)
     ingredients = Ingredients.objects.filter(cocktail=id)
-    return render(request, 'cocktail_view.html', {'cocktail': cocktail,'ingredients':ingredients})
+    similar_cocktails = Cocktail.objects.filter(category=cocktail.category.id)
+    similar_cocktails_list = list(similar_cocktails)
+    random_list = random.choices(similar_cocktails_list,k=3)
+    return render(request, 'cocktail_view.html', {'cocktail': cocktail,'ingredients':ingredients,'random_list':random_list})
 
 
 def confirm_delete_cocktail(request, id):

@@ -14,6 +14,13 @@
             max-width: 300px;
         }
 
+        ul.random-list li {
+            display: inline;
+        }
+
+        ul.random-list li .img-cocktail {
+            max-width: 100px;
+        }
     </style>
 
     <img src="{{ cocktail.image.url }}" class="img-cocktail">
@@ -55,10 +62,15 @@
         </tbody>
     </table>
 
- 
+    <br />
 
-    <br>
+    <ul class='random-list'>
+        {% for r in random_list %}
+            <li><a href="/cocktail/{{ r.id }}/"><img src="{{ r.image.url }}" class="img-cocktail"> {{r.name}}</a></li>
+        {% endfor %}
+    </ul>
 
+    <br />
     <button onclick="window.location.href = '/cocktail/{{ cocktail.id }}/confirm_delete/';">Delete</button>
 
 {% endblock %}
