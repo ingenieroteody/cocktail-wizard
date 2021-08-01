@@ -18,7 +18,11 @@
     </p>
 
     <p>
-        <button onclick="window.location.href = '/cocktail/{{ cocktail.id }}/delete/';">Confirm Delete</button>
+        <form action="/cocktail/delete/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{cocktail.id}}" />
+            <button>Confirm Delete</button>
+        </form>
     </p>
 
 {% endblock %}

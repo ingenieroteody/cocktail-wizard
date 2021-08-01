@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.decorators.csrf import csrf_protect
 
 from cocktails.models import Cocktail
 from cocktails.models import Measure
@@ -13,6 +14,7 @@ from cocktails.models import Ingredients
 import itertools
 import random
 
+@csrf_protect
 def user_login(request):
 
     class LoginForm(forms.Form):
@@ -83,12 +85,24 @@ def view_cocktail(request, id):
     random_list = random.choices(similar_cocktails_list,k=3)
     return render(request, 'cocktail_view.html', {'cocktail': cocktail,'ingredients':ingredients,'random_list':random_list})
 
+class DeleteForm(forms.Form):
+    id = forms.CharField()
 
-def confirm_delete_cocktail(request, id):
-    cocktail = Cocktail.objects.get(id=id)
-    return render(request, 'cocktail_confirm_delete.html', {'cocktail': cocktail})
+@csrf_protect
+def confirm_delete_cocktail(request):
+    if request.method == 'POST':
+        form = DeleteForm(request.POST)
+        if form.is_valid():
+            id = form.data['id']
+            cocktail = Cocktail.objects.get(id=id)
+            return render(request, 'cocktail_confirm_delete.html', {'cocktail': cocktail})
 
-
-def delete_cocktail(request, id):
-    cocktail = Cocktail.objects.get(id=id).delete()
+@csrf_protect
+def delete_cocktail(request):
+    if request.method == 'POST':
+        form = DeleteForm(request.POST)
+        if form.is_valid():
+            id = form.data['id']
+            cocktail = Cocktail.objects.get(id=id).delete()
     return HttpResponseRedirect('/cocktails/')
+

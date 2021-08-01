@@ -7,6 +7,6 @@ from django.urls import path, include
 from cocktails import urls as cocktail_urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin-cocktails-login/', admin.site.urls),
     path('', include(cocktail_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
